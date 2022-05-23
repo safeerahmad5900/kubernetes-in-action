@@ -23,6 +23,7 @@ jobs:
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
         aws-region: us-east-1
 
     - name: Login to Amazon ECR
@@ -35,5 +36,6 @@ jobs:
         ECR_REPOSITORY: clo835-week2
         IMAGE_TAG: v1.0
       run: |
+        cd Chapter02/kubia/
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
