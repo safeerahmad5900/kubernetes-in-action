@@ -33,8 +33,10 @@ jobs:
         IMAGE_TAG: v1.1
       run: |
         cd Chapter02/kubia/
+        ls -ltra
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker run -d -p 80:8080 --name nodeapp $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        echo "logs please"
         docker logs nodeapp
-        curl 172.17.0.2:80 -vvv
+        curl localhost -vvv
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
